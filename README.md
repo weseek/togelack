@@ -1,5 +1,7 @@
 # Togelack
 
+[![docker-build-automated](https://img.shields.io/docker/automated/weseek/togelack.svg)](https://hub.docker.com/r/weseek/togelack/) [![docker-pulls](https://img.shields.io/docker/pulls/weseek/togelack.svg)](https://hub.docker.com/r/weseek/togelack/)
+
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 Slack Summary Service (like togetter).
