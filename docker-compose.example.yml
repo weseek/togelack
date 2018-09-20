@@ -1,0 +1,40 @@
+version: "2"
+services:
+  app:
+    image: weseek/togelack:latest
+    ports:
+      - "3000:3000" # ホストの開いてるポートを割り当てる
+    environment:
+      - "RAILS_ENV=production"
+      - "MONGOID_ENV=production"
+      - "MONGO_URL=mongodb://mongo:27017/togelack"
+      - "REDIS_URL:redis://redis:6379"
+      - "SLACK_TOKEN=xoxp-XXXXXXXXXXXXXXXXXX" # 1. apiのauthページで発行されるトークン
+      - "SLACK_CLIENT_ID=XXXXXXXX.XXXXXXXX" # 2. apiのappページで取得
+      - "SLACK_CLIENT_SECRET=XXXXXXXXXXXXX" # 2. apiのappページで取得
+      - "SLACK_TEAM_ID=XXXXXXXX" # 4. apiを叩いて拾う
+      - "SLACK_TEAM_NAME=example" # ドメインのhttps://XXXXXX.slack.com/の部分
+      - "SECRET_KEY_BASE=example-secret" # 適当な文字列を設定しよう
+    restart: always
+    depends_on:
+      - mongo
+      - redis
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "10"
+  mongo:
+    image: mongo:latest
+    volumes:
+      - "mongo-data:/data/db" # データの永続化のため
+    restart: always
+  redis:
+    image: redis:latest
+    volumes:
+      - "redis-data:/data" # データの永続化のため
+    restart: always
+volumes:
+  mongo-data:
+  redis-data:
