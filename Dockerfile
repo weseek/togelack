@@ -9,7 +9,7 @@ RUN apt-get update && \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/weseek/togelack.git $APP_ROOT
+COPY . $APP_ROOT
 
 RUN \
     echo 'gem: --no-document' >> ~/.gemrc && \
